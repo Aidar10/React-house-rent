@@ -76,19 +76,19 @@ class GoogleMap extends React.Component {
 
     this.marker.addListener('click', function() {
 
-      //hide all other info boxes on click
-      this.hideAll()
+    //hide all other info boxes on click
+    this.hideAll()
 
-      // set active property ono the state
-      setActiveProperty(property, true);
-    }.bind(this)); // important to bind this
+    // set active property ono the state
+    setActiveProperty(property, true);
+  }.bind(this)); // important to bind this
 
-    // push this marker to the markers array on the state
-    markers.push(this.marker);
+  // push this marker to the markers array on the state
+  markers.push(this.marker);
 
-    //show active property info window
-    this.showInfoWindow(activePropertyIndex);
-    })
+  //show active property info window
+  this.showInfoWindow(activePropertyIndex);
+  })
   }
 
   render() {
