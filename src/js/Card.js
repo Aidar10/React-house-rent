@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Card = ({ property, activeProperty, setActiveProperty }) => {
-  const {address, bathrooms, bedrooms, carSpaces, city,index, picture, price} = property;
+  const { address, bathrooms, bedrooms, carSpaces, city,index, picture, price } = property;
 
   return (
   <div id={`card-${index}`} className={`card col-sm-12 col-md-6 col-lg-4 ${property === activeProperty ? 'is-active' : ''}`} onClick={()=> setActiveProperty(property, false)}>
