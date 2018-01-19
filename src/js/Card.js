@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 
 const Card = ({ property, activeProperty }) => {
   const {address, bathrooms, bedrooms, carSpaces, city,index, picture, price} = property;
-  return <div id="card-1" className={`card col-sm-12 col-md-6 col-lg-4 ${property === activeProperty ? 'is-active' : ''}`}>
+  return <div id={`card-${index}`} className={`card col-sm-12 col-md-6 col-lg-4 ${property === activeProperty ? 'is-active' : ''}`}>
     <img src={picture} alt={city} />
     <p className="price">{price}</p>
     <div className="details">
-      <span className="index">{index}</span>
+      <span className="index">{index+1}</span>
       <p className="location">
         {city}<br />{address}
       </p>
