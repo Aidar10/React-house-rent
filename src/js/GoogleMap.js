@@ -11,8 +11,8 @@ class GoogleMap extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const {activeProperty} = nextProps;
-    const {index} = activeProperty;
+    const { activeProperty } = nextProps;
+    const { index } = activeProperty;
 
     this.hideAll(); 
 
@@ -20,12 +20,12 @@ class GoogleMap extends React.Component {
   }
 
   showInfoWindow(index) {
-    const {markers} = this.state;
+    const { markers } = this.state;
     markers[index] && markers[index].infoWindow.open(this.map, markers[index]);
   }
 
   hideAll() {
-    const {markers} = this.state;
+    const { markers } = this.state;
 
     markers.forEach(marker => {
       marker.infoWindow.close();
@@ -33,17 +33,13 @@ class GoogleMap extends React.Component {
   }
 
   componentDidMount() {
-
     const { properties, activeProperty } = this.props;
 
-    const {latitude, longitude} = activeProperty;
+    const { latitude, longitude } = activeProperty;
 
     this.map = new google.maps.Map(this.map, {
-      center: {lat: latitude, lng: longitude},
+      center: { lat: latitude, lng: longitude },
       mapTypeControl: true,
-      mapTypeControlOptions: {
-        style: google.maps.MapTypeControlStyle.DROPDOWN_MENU
-      },
       zoom: 15
     });
 
@@ -51,53 +47,54 @@ class GoogleMap extends React.Component {
   }
 
   createMarkers(properties) {
-    const {markers} = this.state;
+    const { markers } = this.state;
     const { setActiveProperty, activeProperty } = this.props;
     const activePropertyIndex = activeProperty.index;
-      properties.map(property => {
-      const {address, index, latitude, longitude } = property;
-      this.marker = new google.maps.Marker({
-        position:{lat: latitude, lng: longitude},
-        map: this.map,
-        label: {
-          color: '#ffffff',
-          text: `${index+1}`
-        },
-        icon: {
-          url: 'https://ihatetomatoes.net/react-tutorials/google-maps/images/img_map-marker.png',
-          size: new google.maps.Size(22,55),
-          origin: new google.maps.Point(0,-15),
-          anchor: new google.maps.Point(11,52),
-        }
-      });
 
-      const infoWindow = new google.maps.InfoWindow({
-        content: `<h1>${address}</h1>`
-      })
+    properties.map(property => {
+    const { address, index, latitude, longitude } = property;
+    this.marker = new google.maps.Marker({
+      position:{lat: latitude, lng: longitude},
+      map: this.map,
+      label: {
+        color: '#ffffff',
+        text: `${index+1}`
+      },
+      icon: {
+        url: 'https://ihatetomatoes.net/react-tutorials/google-maps/images/img_map-marker.png',
+        size: new google.maps.Size(22,55),
+        origin: new google.maps.Point(0,-15),
+        anchor: new google.maps.Point(11,52),
+      }
+    });
 
-      this.marker.infoWindow = infoWindow;
+    const infoWindow = new google.maps.InfoWindow({
+      content: `<h1>${address}</h1>`
+    })
 
-      this.marker.addListener('click', function() {
+    this.marker.infoWindow = infoWindow;
 
-        //hide all other info boxes on click
-        this.hideAll()
+    this.marker.addListener('click', function() {
 
-        // set active property ono the state
-        setActiveProperty(property, true);
-      }.bind(this)); // important to bind this
+      //hide all other info boxes on click
+      this.hideAll()
 
-      // push this marker to the markers array on the state
-      markers.push(this.marker);
+      // set active property ono the state
+      setActiveProperty(property, true);
+    }.bind(this)); // important to bind this
 
-      //show active property info window
-      this.showInfoWindow(activePropertyIndex);
+    // push this marker to the markers array on the state
+    markers.push(this.marker);
+
+    //show active property info window
+    this.showInfoWindow(activePropertyIndex);
     })
   }
 
   render() {
     return(
       <div className="mapContainer">
-        <div id="map" ref={(el) => this.map = el}></div>
+        <div id="map" ref={ (el) => this.map = el }></div>
       </div> 
     )
   }

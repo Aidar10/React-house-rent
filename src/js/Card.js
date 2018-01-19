@@ -3,11 +3,13 @@ import PropTypes from 'prop-types';
 
 const Card = ({ property, activeProperty, setActiveProperty }) => {
   const {address, bathrooms, bedrooms, carSpaces, city,index, picture, price} = property;
-  return <div id={`card-${index}`} className={`card col-sm-12 col-md-6 col-lg-4 ${property === activeProperty ? 'is-active' : ''}`} onClick={()=> setActiveProperty(property, false)}>
+
+  return (
+  <div id={`card-${index}`} className={`card col-sm-12 col-md-6 col-lg-4 ${property === activeProperty ? 'is-active' : ''}`} onClick={()=> setActiveProperty(property, false)}>
     <img src={picture} alt={city} />
     <p className="price">{price}</p>
     <div className="details">
-      <span className="index">{index+1}</span>
+      <span className="index">{index + 1}</span>
       <p className="location">
         {city}<br />{address}
       </p>
@@ -17,7 +19,7 @@ const Card = ({ property, activeProperty, setActiveProperty }) => {
         <li className="icon-car">{carSpaces}<span>parking spots</span></li>
       </ul>
     </div>
-  </div>
+  </div>)
 }
 
 Card.propTypes = {
